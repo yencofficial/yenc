@@ -1551,6 +1551,17 @@ body {
     border-color: #fbbf24; /* Changes border to gold on hover */
 }
     </style>
+    <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </head>
 <div id="maintenance-mode">
    <div id="main-content" class="maintenance-box">
