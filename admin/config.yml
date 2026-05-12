@@ -8,7 +8,7 @@ public_folder: "/images"
 collections:
   - name: "blog"
     label: "YENC Journal"
-    file: "data/post.json" # Force the CMS to edit this specific file
+    file: "data/post.json" # <--- This is the magic line
     allow_add: true
     fields:
       - name: posts
@@ -21,4 +21,4 @@ collections:
           - { label: "Date", name: "date", widget: "string" }
           - { label: "Excerpt", name: "excerpt", widget: "text" }
           - { label: "Image URL", name: "image", widget: "string" }
-          - { label: "Path", name: "url", widget: "hidden", default: "articles/post.html" }
+          - { label: "Path", name: "url", widget: "hidden", default: "blog.html" }
