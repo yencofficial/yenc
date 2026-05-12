@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal | Youth Empowerment Network Calauag</title>
-    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
@@ -248,6 +248,44 @@
             `).join('');
         }
         document.addEventListener('DOMContentLoaded', displayArticles);
+
+        const SUPABASE_URL = 'https://your-url.supabase.co';
+const SUPABASE_KEY = 'your-public-anon-key';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+async function loadPublicBlogs() {
+    // 1. Fetch data from the 'blogs' table
+    const { data: posts, error } = await supabaseClient
+        .from('blogs')
+        .select('*')
+        .eq('status', 'published') // Only show posts marked as published
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Error loading blogs:", error);
+        return;
+    }
+
+    const container = document.getElementById('blog-posts-container');
+    container.innerHTML = ''; // Clear loading text
+
+    // 2. Loop through the posts and create HTML for each
+    posts.forEach(post => {
+        const postCard = `
+            <div class="blog-card">
+                <img src="${post.imageUrl || 'default-placeholder.jpg'}" alt="${post.title}">
+                <h2>${post.title}</h2>
+                <p class="date">${post.date || ''}</p>
+                <p class="excerpt">${post.content.substring(0, 150)}...</p>
+                <a href="post-detail.html?id=${post.id}">Read More</a>
+            </div>
+        `;
+        container.innerHTML += postCard;
+    });
+}
+
+// Run the function when the page loads
+document.addEventListener('DOMContentLoaded', loadPublicBlogs);
     </script>
 </body>
 </html>
