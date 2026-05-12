@@ -8,7 +8,7 @@ public_folder: "/images"
 collections:
   - name: "blog"
     label: "YENC Journal"
-    file: "data/post.json" # Pointing exactly to your file in the screenshot
+    file: "data/post.json" # Force the CMS to edit this specific file
     allow_add: true
     fields:
       - name: posts
