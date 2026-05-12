@@ -1,0 +1,23 @@
+backend:
+  name: git-gateway
+  branch: main # Change to 'master' if your GitHub says master
+
+media_folder: "images"
+public_folder: "/images"
+
+site_url: https://yencofficial.netlify.app
+display_name: YENC Manager
+
+collections:
+  - name: "blog"
+    label: "YENC Journal"
+    file: "data/article.json"
+    allow_add: true
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Leadership", "Education", "Community"] }
+      - { label: "Date", name: "date", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Image URL", name: "image", widget: "string" }
+      - { label: "Path", name: "url", widget: "hidden", default: "articles/post.html" }
