@@ -158,6 +158,17 @@
             alert("Link copied to clipboard!");
             closeShare();
         }
+        // Old hardcoded list: const articles = [...];
+
+// NEW Automated version:
+const localArticles = JSON.parse(localStorage.getItem('yenc_articles')) || [];
+const defaultArticles = [
+    { id: "leadership-forum", title: "Empowering Leaders", ... },
+    { id: "student-academic-performance", title: "AI Impact", ... }
+];
+
+// Combine your manual posts and your dashboard posts
+const articles = [...defaultArticles, ...localArticles];
     </script>
 </body>
 </html>
