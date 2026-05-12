@@ -200,13 +200,18 @@
     </footer>
 
     <script>
-        // MOBILE MENU
-        const menuToggle = document.getElementById('mobile-menu');
-        const navList = document.getElementById('nav-list');
-        menuToggle.addEventListener('click', () => { navList.classList.toggle('active'); });
+       // MOBILE MENU
+const menuToggle = document.getElementById('mobile-menu');
+const navList = document.getElementById('nav-list');
+menuToggle.addEventListener('click', () => { navList.classList.toggle('active'); });
 
-        // ARTICLE DATA
-       const myArticles = [
+// SUPABASE CONFIGURATION
+const SUPABASE_URL = 'https://ofakurzpwvbsuyjkjjsh.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mYWt1cnpwd3Zic3V5amtqanNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjU3ODUsImV4cCI6MjA5NDE0MTc4NX0.uk0pFCJLwEO5onkbltn3TodSKsxazEeueFtTXnLrhUw';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// HARDCODED ARTICLES (Optional - you can keep these or remove them)
+const myArticles = [
     {
         id: "leadership-forum",
         title: "Empowering the Next Generation of Leaders",
@@ -214,78 +219,59 @@
         date: "May 11, 2026",
         excerpt: "Highlights from our recent leadership forum in Calauag...",
         image: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800",
-        url: "articles/post.html?id=leadership-forum", // Path to template + ID
-        content: `
-            <p>The Calauag Youth Empowerment Network recently hosted its premier Leadership Forum. As the Editor-in-Chief, witnessing the collaboration was inspiring.</p>
-            <blockquote>"Empowered youth are the architects of a better tomorrow."</blockquote>
-            <p>We discussed the core values of accountability and community-driven action. This is just the beginning for YENC.</p>
-        `
-    }, 
-    {
-        id: "student-academic-performance", // A unique ID for the URL
-        title: "Impact of AI on Student Performance",
-        category: "Education",
-        date: "May 15, 2026",
-        excerpt: "Exploring how ChatGPT usage affects Grade 10 students...",
-        image: "https://images.unsplash.com/photo-1501503060445-7096756386c6?w=800",
-        url: "articles/post.html?id=student-academic-performance" 
+        url: "articles/post.html?id=leadership-forum"
     }
 ];
 
-        function displayArticles() {
-            const grid = document.getElementById('blog-grid');
-            grid.innerHTML = myArticles.map(article => `
-                <a href="${article.url}" class="article-card">
-                    <div class="article-image" style="background-image: url('${article.image}')">
-                        <span class="category-tag">${article.category}</span>
-                    </div>
-                    <div class="article-body">
-                        <span class="article-date" style="font-size: 0.8rem; color: #718096;">${article.date}</span>
-                        <h3 class="article-title">${article.title}</h3>
-                        <p style="font-size: 0.9rem; color: #4a5568; line-height: 1.5;">${article.excerpt}</p>
-                    </div>
-                </a>
-            `).join('');
-        }
-        document.addEventListener('DOMContentLoaded', displayArticles);
+async function displayAllBlogs() {
+    const grid = document.getElementById('blog-grid');
+    
+    // 1. Start with your hardcoded articles
+    let allHTML = myArticles.map(article => renderCard(article)).join('');
 
-        const SUPABASE_URL = 'https://ofakurzpwvbsuyjkjjsh.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mYWt1cnpwd3Zic3V5amtqanNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjU3ODUsImV4cCI6MjA5NDE0MTc4NX0.uk0pFCJLwEO5onkbltn3TodSKsxazEeueFtTXnLrhUw';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-async function loadPublicBlogs() {
-    // 1. Fetch data from the 'blogs' table
-    const { data: posts, error } = await supabaseClient
+    // 2. Fetch live blogs from Supabase
+    const { data: dbPosts, error } = await supabaseClient
         .from('blogs')
         .select('*')
-        .eq('status', 'published') // Only show posts marked as published
+        .eq('status', 'published') 
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error("Error loading blogs:", error);
-        return;
+        console.error("Error loading Supabase blogs:", error);
+    } else {
+        // 3. Convert Supabase data into HTML cards
+        const supabaseHTML = dbPosts.map(post => renderCard({
+            url: `articles/post.html?id=${post.id}`,
+            image: post.imageUrl || 'https://via.placeholder.com/800x400',
+            category: post.category || 'Journal',
+            date: post.date || new Date(post.created_at).toLocaleDateString(),
+            title: post.title,
+            excerpt: post.content ? post.content.substring(0, 120) + "..." : ""
+        })).join('');
+        
+        allHTML += supabaseHTML;
     }
 
-    const container = document.getElementById('blog-posts-container');
-    container.innerHTML = ''; // Clear loading text
-
-    // 2. Loop through the posts and create HTML for each
-    posts.forEach(post => {
-        const postCard = `
-            <div class="blog-card">
-                <img src="${post.imageUrl || 'default-placeholder.jpg'}" alt="${post.title}">
-                <h2>${post.title}</h2>
-                <p class="date">${post.date || ''}</p>
-                <p class="excerpt">${post.content.substring(0, 150)}...</p>
-                <a href="post-detail.html?id=${post.id}">Read More</a>
-            </div>
-        `;
-        container.innerHTML += postCard;
-    });
+    grid.innerHTML = allHTML;
 }
 
-// Run the function when the page loads
-document.addEventListener('DOMContentLoaded', loadPublicBlogs);
+// Reusable function to keep the design consistent
+function renderCard(item) {
+    return `
+        <a href="${item.url}" class="article-card">
+            <div class="article-image" style="background-image: url('${item.image}')">
+                <span class="category-tag">${item.category}</span>
+            </div>
+            <div class="article-body">
+                <span class="article-date" style="font-size: 0.8rem; color: #718096;">${item.date}</span>
+                <h3 class="article-title">${item.title}</h3>
+                <p style="font-size: 0.9rem; color: #4a5568; line-height: 1.5;">${item.excerpt}</p>
+            </div>
+        </a>
+    `;
+}
+
+document.addEventListener('DOMContentLoaded', displayAllBlogs);
     </script>
 </body>
 </html>
