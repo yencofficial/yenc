@@ -8,12 +8,15 @@ public_folder: "/images"
 collections:
   - name: "blog"
     label: "YENC Journal"
-    folder: "data" # This tells the CMS to look inside the data folder
-    create: true # This allows you to create new posts
+    file: "data/article.json" # Point specifically to your JSON file
+    allow_add: true
     fields:
-      - { label: "ID", name: "id", widget: "string" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Leadership", "Education", "Community"] }
-      - { label: "Date", name: "date", widget: "string" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Image URL", name: "image", widget: "string" }
+      - name: posts
+        label: Posts
+        widget: list
+        fields:
+          - { label: "ID", name: "id", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Category", name: "category", widget: "select", options: ["Leadership", "Education", "Community"] }
+          - { label: "Date", name: "date", widget: "string" }
+          - { label: "Excerpt", name: "excerpt", widget: "text" }
