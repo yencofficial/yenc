@@ -8,7 +8,7 @@ public_folder: "/images"
 collections:
   - name: "blog"
     label: "YENC Journal"
-    file: "data/article.json" # Point specifically to your JSON file
+    file: "data/post.json" # Pointing exactly to your file in the screenshot
     allow_add: true
     fields:
       - name: posts
@@ -20,3 +20,5 @@ collections:
           - { label: "Category", name: "category", widget: "select", options: ["Leadership", "Education", "Community"] }
           - { label: "Date", name: "date", widget: "string" }
           - { label: "Excerpt", name: "excerpt", widget: "text" }
+          - { label: "Image URL", name: "image", widget: "string" }
+          - { label: "Path", name: "url", widget: "hidden", default: "articles/post.html" }
