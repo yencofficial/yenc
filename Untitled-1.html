@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YENC | Executive Blog Automation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --yenc-dark: #0a0e14;
+            --yenc-sidebar: #111827;
+            --yenc-card: #161b22;
+            --yenc-gold: #f8bf24;
+            --yenc-gold-dim: rgba(248, 191, 36, 0.1);
+            --yenc-border: rgba(255, 255, 255, 0.08);
+            --yenc-text: #ffffff;
+            --yenc-muted: #94a3b8;
+            --accent-glow: 0 0 15px rgba(248, 191, 36, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--yenc-dark);
+            color: var(--yenc-text);
+            min-height: 100vh;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Auth Screen */
+        #auth-screen {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top right, #1a202c, #0a0e14);
+        }
+
+        .auth-card {
+            background: var(--yenc-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--yenc-border);
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-header { text-align: center; margin-bottom: 30px; }
+        .auth-header .logo { 
+            width: 50px; height: 50px; background: var(--yenc-gold); 
+            border-radius: 12px; display: flex; align-items: center; 
+            justify-content: center; margin: 0 auto 15px; color: black; font-weight: 800;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--yenc-muted); font-size: 0.85rem; margin-bottom: 8px; }
+        .form-group input { 
+            width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.3); 
+            border: 1px solid var(--yenc-border); border-radius: 8px; color: white;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus { border-color: var(--yenc-gold); outline: none; }
+
+        .btn-primary { 
+            width: 100%; padding: 14px; background: var(--yenc-gold); 
+            color: black; border: none; border-radius: 8px; font-weight: 700; 
+            cursor: pointer; transition: transform 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); }
+
+        /* Dashboard Layout */
+        #dashboard-screen {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--yenc-sidebar);
+            border-right: 1px solid var(--yenc-border);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 12px; padding: 12px;
+            color: var(--yenc-muted); text-decoration: none; border-radius: 10px;
+            margin-bottom: 8px; transition: 0.3s; cursor: pointer;
+        }
+        .nav-link.active { background: var(--yenc-gold-dim); color: var(--yenc-gold); }
+        .nav-link:hover:not(.active) { color: white; background: rgba(255,255,255,0.05); }
+
+        .main-content { flex: 1; overflow-y: auto; padding: 40px; }
+
+        /* Blog Editor & Cards */
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        
+        .blog-card {
+            background: var(--yenc-card);
+            border-radius: 16px;
+            border: 1px solid var(--yenc-border);
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover { border-color: var(--yenc-gold); transform: translateY(-5px); }
+        
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            background: #000;
+            object-fit: cover;
+            border-bottom: 1px solid var(--yenc-border);
+        }
+
+        .blog-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-tag { 
+            font-size: 0.7rem; font-weight: 700; padding: 4px 8px; 
+            border-radius: 4px; text-transform: uppercase; margin-bottom: 12px; display: inline-block;
+        }
+        .status-published { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .status-scheduled { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .status-draft { background: rgba(248, 191, 36, 0.1); color: var(--yenc-gold); }
+
+        .blog-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+        .blog-excerpt { color: var(--yenc-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 20px; }
+
+        .card-footer { border-top: 1px solid var(--yenc-border); padding-top: 15px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+
+        /* Modal / Editor Overlay */
+        .editor-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+
+        .editor-container {
+            background: var(--yenc-card); width: 95%; max-width: 1000px;
+            max-height: 90vh; overflow-y: auto; border-radius: 24px;
+            border: 1px solid var(--yenc-border); padding: 40px;
+        }
+
+        textarea { 
+            width: 100%; background: #000; border: 1px solid var(--yenc-border); 
+            border-radius: 8px; color: white; padding: 15px; min-height: 300px;
+            font-size: 1rem; line-height: 1.6; outline: none;
+            resize: vertical;
+        }
+
+        select {
+            width: 100%; padding: 12px; background: #000; border: 1px solid var(--yenc-border); border-radius: 8px; color: white; outline: none;
+        }
+
+        .toast {
+            position: fixed; bottom: 30px; right: 30px; padding: 15px 25px;
+            background: var(--yenc-card); border-left: 4px solid var(--yenc-gold);
+            border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none; z-index: 2000;
+        }
+
+        .image-preview-area {
+            width: 100%; height: 160px; background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--yenc-border); border-radius: 8px;
+            margin-bottom: 15px; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; cursor: pointer;
+        }
+        .image-preview-area img { width: 100%; height: 100%; object-fit: cover; }
+
+        .schedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid var(--yenc-border); }
+
+        .hidden-file-input { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Authentication Screen -->
+    <section id="auth-screen">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo">E</div>
+                <h2>Executive Portal</h2>
+                <p style="color: var(--yenc-muted); font-size: 0.9rem;">Sign in to manage blog automation</p>
+            </div>
+            <div class="form-group">
+                <label>Corporate Email</label>
+                <input type="email" id="auth-email" placeholder="executive@yenc.org">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="auth-pass" placeholder="••••••••">
+            </div>
+            <button class="btn-primary" onclick="login()">Access Dashboard</button>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--yenc-muted);">
+                New executive? <a href="contacts.html" style="color: var(--yenc-gold);">Request credentials</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Dashboard Screen -->
+    <section id="dashboard-screen" class="hidden">
+        <aside class="sidebar">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 40px;">
+                <div class="logo" style="width: 32px; height: 32px; background: var(--yenc-gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: black; font-weight: 800;">E</div>
+                <h3 style="font-size: 1.1rem;">YENC Executive</h3>
+            </div>
+            
+            <div id="nav-blogs" class="nav-link active" onclick="switchView('blogs')">
+                <i class="fa-solid fa-pen-nib"></i> <span>Manage Blogs</span>
+            </div>
+            <div id="nav-analytics" class="nav-link" onclick="switchView('analytics')">
+                <i class="fa-solid fa-chart-simple"></i> <span>Analytics</span>
+            </div>
+            <div id="nav-schedule" class="nav-link" onclick="switchView('schedule')">
+                <i class="fa-solid fa-clock"></i> <span>Auto-Scheduler</span>
+            </div>
+
+            <div class="nav-link" style="margin-top: auto;" onclick="logout()">
+                <i class="fa-solid fa-power-off"></i> <span>Sign Out</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="header-actions">
+                <div>
+                    <h1 id="view-title">Blog Content Library</h1>
+                    <p id="view-desc" style="color: var(--yenc-muted);">Create and manage public announcements.</p>
+                </div>
+                <div id="action-btns">
+                    <button class="btn-primary" style="width: auto; padding: 12px 24px;" onclick="openEditor()">
+                        <i class="fa-solid fa-plus"></i> New Blog Post
+                    </button>
+                </div>
+            </div>
+
+            <div class="blog-grid" id="blog-container">
+                <!-- Blog cards injected here -->
+            </div>
+        </main>
+    </section>
+
+    <!-- Editor Modal -->
+    <div class="editor-overlay" id="editor-overlay">
+        <div class="editor-container">
+            <h2 style="margin-bottom: 25px;" id="editor-title">Draft New Post</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+                <div>
+                    <div class="form-group">
+                        <label>Blog Title</label>
+                        <input type="text" id="post-title" placeholder="Enter headline...">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="post-category">
+                            <option value="Announcement">Announcement</option>
+                            <option value="Impact Story">Impact Story</option>
+                            <option value="Governance">Governance</option>
+                            <option value="Automation">Automation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Image Upload / URL</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="post-image-url" placeholder="Paste URL..." oninput="updateImagePreview('url')" style="flex-grow: 1;">
+                            <button class="btn-primary" style="width: 50px; padding: 0;" onclick="document.getElementById('file-upload').click()">
+                                <i class="fa-solid fa-upload"></i>
+                            </button>
+                            <input type="file" id="file-upload" class="hidden-file-input" accept="image/*" onchange="updateImagePreview('file')">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label style="display: block; color: var(--yenc-muted); font-size: 0.85rem; margin-bottom: 8px;">Cover Preview</label>
+                    <div class="image-preview-area" id="image-preview" onclick="document.getElementById('file-upload').click()">
+                        <span style="color: var(--yenc-muted); font-size: 0.8rem;">Click to upload or paste URL</span>
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label><i class="fa-solid fa-robot"></i> Automation Settings</label>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-top: 8px;">
+                            <input type="checkbox" id="post-is-scheduled" style="width: 18px; height: 18px; cursor: pointer;" onchange="toggleScheduleInputs()">
+                            <span style="font-size: 0.9rem; color: var(--yenc-muted);">Schedule this post?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schedule-controls" class="hidden" style="margin-bottom: 24px;">
+                <label style="display: block; color: var(--yenc-gold); font-size: 0.8rem; margin-bottom: 8px; font-weight: 700;">RELEASE SCHEDULE</label>
+                <div class="schedule-grid">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Target Date</label>
+                        <input type="date" id="post-date">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Target Time</label>
+                        <input type="time" id="post-time">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Content (Markdown Supported)</label>
+                <textarea id="post-content" placeholder="Start writing the future of YENC..."></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <button class="btn-primary" style="background: transparent; border: 1px solid var(--yenc-border); color: white;" onclick="closeEditor()">Discard Changes</button>
+                <button class="btn-primary" id="save-btn" onclick="saveBlog()">Publish Immediately</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Post successfully updated.</div>
+
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://ofakurzpwvbsuyjkjjsh.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mYWt1cnpwd3Zic3V5amtqanNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NjU3ODUsImV4cCI6MjA5NDE0MTc4NX0.uk0pFCJLwEO5onkbltn3TodSKsxazEeueFtTXnLrhUw';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let blogs = [];
+        let editingId = null;
+        let currentImageBase64 = null;
+
+        async function login() {
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-pass').value;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                alert("Login failed: " + error.message);
+            } else {
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('dashboard-screen').classList.remove('hidden');
+                fetchBlogsFromSupabase();
+                showToast("Welcome back, Executive.");
+            }
+        }
+
+        function logout() { window.location.reload(); }
+
+        async function fetchBlogsFromSupabase() {
+            const { data, error } = await supabaseClient
+                .from('blogs') 
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) {
+                console.error('Error fetching blogs:', error);
+            } else {
+                blogs = data || [];
+                renderBlogs();
+            }
+        }
+
+        function renderBlogs(filter = 'all') {
+            const container = document.getElementById('blog-container');
+            container.innerHTML = '';
+            
+            let filteredBlogs = blogs;
+            if (filter === 'scheduled') filteredBlogs = blogs.filter(b => b.status === 'scheduled');
+
+            filteredBlogs.forEach(blog => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                
+                const imgTag = blog.imageUrl 
+                    ? `<img src="${blog.imageUrl}" class="blog-image" alt="Blog cover">`
+                    : `<div class="blog-image" style="display: flex; align-items: center; justify-content: center; background: #222;"><i class="fa-solid fa-image fa-2x" style="color: #444;"></i></div>`;
+
+                card.innerHTML = `
+                    ${imgTag}
+                    <div class="blog-card-content">
+                        <span class="status-tag status-${blog.status}">${blog.status}</span>
+                        <h3 class="blog-title">${blog.title}</h3>
+                        <p class="blog-excerpt">${blog.content ? blog.content.substring(0, 100) + '...' : 'No content'}</p>
+                        <div class="card-footer">
+                            <span style="font-size: 0.8rem; color: var(--yenc-muted);">
+                                <i class="fa-regular fa-clock"></i> ${blog.date || 'No Date'} ${blog.scheduleTime || ''}
+                            </span>
+                            <div style="display: flex; gap: 10px;">
+                                <button onclick="editBlog(${blog.id})" style="background: none; border: none; color: var(--yenc-gold); cursor: pointer;"><i class="fa-solid fa-edit"></i></button>
+                                <button onclick="deleteBlog(${blog.id})" style="background: none; border: none; color: var(--yenc-muted); cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateImagePreview(source) {
+            const preview = document.getElementById('image-preview');
+            const urlInput = document.getElementById('post-image-url');
+            
+            if (source === 'url') {
+                const url = urlInput.value;
+                currentImageBase64 = null;
+                if (url && url.startsWith('http')) {
+                    preview.innerHTML = `<img src="${url}" alt="Preview" onerror="this.parentElement.innerHTML='<span style=\'color: #ef4444\'>Invalid URL</span>'">`;
+                } else {
+                    preview.innerHTML = `<span style="color: var(--yenc-muted); font-size: 0.8rem;">Click to upload or paste URL</span>`;
+                }
+            } else if (source === 'file') {
+                const file = document.getElementById('file-upload').files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        currentImageBase64 = e.target.result;
+                        urlInput.value = '';
+                        preview.innerHTML = `<img src="${currentImageBase64}" alt="Preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+
+        function toggleScheduleInputs() {
+            const isChecked = document.getElementById('post-is-scheduled').checked;
+            const controls = document.getElementById('schedule-controls');
+            const saveBtn = document.getElementById('save-btn');
+            
+            if (isChecked) {
+                controls.classList.remove('hidden');
+                saveBtn.innerText = "Schedule for Automation";
+            } else {
+                controls.classList.add('hidden');
+                saveBtn.innerText = "Publish Immediately";
+            }
+        }
+
+        function openEditor() {
+            editingId = null;
+            currentImageBase64 = null;
+            document.getElementById('editor-title').innerText = "Compose New Post";
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+            document.getElementById('post-image-url').value = '';
+            document.getElementById('post-is-scheduled').checked = false;
+            toggleScheduleInputs();
+            updateImagePreview('url');
+            document.getElementById('editor-overlay').style.display = 'flex';
+        }
+
+        function closeEditor() { document.getElementById('editor-overlay').style.display = 'none'; }
+
+        function editBlog(id) {
+            const blog = blogs.find(b => b.id === id);
+            if (!blog) return;
+
+            editingId = id;
+            document.getElementById('editor-title').innerText = "Edit Professional Post";
+            document.getElementById('post-title').value = blog.title;
+            document.getElementById('post-content').value = blog.content;
+            document.getElementById('post-image-url').value = (blog.imageUrl && !blog.imageUrl.startsWith('data:')) ? blog.imageUrl : '';
+            
+            if (blog.status === 'scheduled') {
+                document.getElementById('post-is-scheduled').checked = true;
+                document.getElementById('post-date').value = blog.dateISO || '';
+                document.getElementById('post-time').value = blog.scheduleTime || '';
+            } else {
+                document.getElementById('post-is-scheduled').checked = false;
+            }
+            
+            currentImageBase64 = (blog.imageUrl && blog.imageUrl.startsWith('data:')) ? blog.imageUrl : null;
+            toggleScheduleInputs();
+            
+            const preview = document.getElementById('image-preview');
+            if (blog.imageUrl) {
+                preview.innerHTML = `<img src="${blog.imageUrl}" alt="Preview">`;
+            } else {
+                preview.innerHTML = `<span style="color: var(--yenc-muted); font-size: 0.8rem;">Click to upload or paste URL</span>`;
+            }
+            
+            document.getElementById('editor-overlay').style.display = 'flex';
+        }
+
+        async function saveBlog() {
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            const category = document.getElementById('post-category').value;
+            const isScheduled = document.getElementById('post-is-scheduled').checked;
+            const urlInput = document.getElementById('post-image-url').value;
+            
+            if (!title || !content) {
+                alert("Please fill in the title and content.");
+                return;
+            }
+
+            const status = isScheduled ? 'scheduled' : 'published';
+            const imageUrl = currentImageBase64 || urlInput || '';
+            const scheduleTime = isScheduled ? document.getElementById('post-time').value : '';
+            const dateISO = isScheduled ? document.getElementById('post-date').value : '';
+            const date = dateISO ? new Date(dateISO).toLocaleDateString() : new Date().toLocaleDateString();
+
+            const blogPayload = {
+                title,
+                content,
+                category,
+                status,
+                imageUrl,
+                scheduleTime,
+                dateISO,
+                date
+            };
+
+            let result;
+            if (editingId) {
+                result = await supabaseClient
+                    .from('blogs')
+                    .update(blogPayload)
+                    .eq('id', editingId);
+            } else {
+                result = await supabaseClient
+                    .from('blogs')
+                    .insert([blogPayload]);
+            }
+
+            if (result.error) {
+                alert("Error saving: " + result.error.message);
+            } else {
+                showToast(editingId ? "Post updated." : "Post created.");
+                fetchBlogsFromSupabase();
+                closeEditor();
+            }
+        }
+
+        async function deleteBlog(id) {
+            if (confirm("Are you sure you want to delete this post?")) {
+                const { error } = await supabaseClient
+                    .from('blogs')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    alert("Delete failed: " + error.message);
+                } else {
+                    fetchBlogsFromSupabase();
+                    showToast("Post deleted.");
+                }
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        function switchView(view) {
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(l => l.classList.remove('active'));
+            document.getElementById('nav-' + view).classList.add('active');
+            
+            const title = document.getElementById('view-title');
+            const desc = document.getElementById('view-desc');
+            const actionContainer = document.getElementById('action-btns');
+
+            if (view === 'analytics') {
+                title.innerText = "Performance Analytics";
+                desc.innerText = "Tracking engagement and automation health.";
+                actionContainer.classList.add('hidden');
+                renderBlogs(); 
+            } else if (view === 'blogs') {
+                title.innerText = "Blog Content Library";
+                desc.innerText = "Create and manage public announcements.";
+                actionContainer.classList.remove('hidden');
+                renderBlogs('all');
+            } else if (view === 'schedule') {
+                title.innerText = "Auto-Scheduler";
+                desc.innerText = "Managing upcoming automated blog releases.";
+                actionContainer.classList.remove('hidden');
+                renderBlogs('scheduled');
+            }
+        }
+    </script>
+</body>
+</html>
