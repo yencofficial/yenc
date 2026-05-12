@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Youth Empowerment Network Calauag (YENC) – a youth-led organization committed to developing responsible, empowered, and community-driven young leaders in Calauag, Quezon.">
+    <title>YENC | Youth Empowerment Network Calauag</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy-900: #030D1E;
+            --navy-800: #071428;
+            --navy-700: #0B1D3A;
+            --navy-600: #112550;
+            --navy-500: #163268;
+            --gold-500: #C4912B;
+            --gold-400: #D4A63E;
+            --gold-300: #E4BF60;
+            --gold-100: rgba(196, 145, 43, 0.12);
+            --gold-border: rgba(196, 145, 43, 0.35);
+            --cream: #FAF8F4;
+            --cream-mid: #F0EBE0;
+            --white: #FFFFFF;
+            --text: #0D1C2E;
+            --text-mid: #3A4C66;
+            --text-light: #6B7E96;
+            --border: #E2E9F4;
+            --border-dark: rgba(255,255,255,0.1);
+            --nav-height: 72px;
+            --font-display: 'DM Sans', 'Arial Black', sans-serif;
+            --font-body: 'DM Sans', 'Arial Black', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 2px 8px rgba(7, 20, 40, 0.08);
+            --shadow-md: 0 8px 28px rgba(7, 20, 40, 0.12);
+            --shadow-lg: 0 20px 56px rgba(7, 20, 40, 0.18);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        img { display: block; max-width: 100%; }
+        a { text-decoration: none; color: inherit; }
+        .section-head {
+    text-align: center;      /* Centers all text inside the header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* Centers badges and horizontal rules */
+    margin-bottom: 3rem;     /* Adds nice breathing room before the content */
+}
+        /* ===== SVG ICONS ===== */
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.08s; }
+        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
+        .reveal-d4 { transition-delay: 0.32s; }
+        .reveal-d5 { transition-delay: 0.40s; }
+        .reveal-d6 { transition-delay: 0.48s; }
+
+        /* ===== SHARED SECTION STYLES ===== */
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+        .section-label.light {
+            background: var(--gold-100);
+            color: var(--gold-400);
+            border: 1px solid var(--gold-border);
+        }
+        .section-label.dark {
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .section-head h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: var(--navy-700);
+            margin-bottom: 1rem;
+        }
+        .section-head h2.light { color: var(--white); }
+        .section-head p {
+            color: var(--text-mid);
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .section-head p.light { color: rgba(255,255,255,0.72); }
+        .section-rule {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--navy-700), var(--gold-500));
+            border-radius: 2px;
+            margin: 1.1rem auto 0;
+        }
+        .section-rule.gold-rule {
+            background: linear-gradient(90deg, var(--gold-500), var(--gold-300));
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-gold {
+            background: var(--gold-500);
+            color: var(--navy-900);
+            border-color: var(--gold-500);
+        }
+        .btn-gold:hover {
+            background: var(--gold-400);
+            border-color: var(--gold-400);
+            box-shadow: 0 8px 28px rgba(196, 145, 43, 0.35);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--white);
+            border-color: rgba(255,255,255,0.45);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.75);
+        }
+        .btn-navy {
+            background: var(--navy-700);
+            color: var(--white);
+            border-color: var(--navy-700);
+        }
+        .btn-navy:hover {
+            background: var(--navy-900);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-outline-navy {
+            background: transparent;
+            color: var(--navy-700);
+            border-color: var(--border);
+        }
+        .btn-outline-navy:hover {
+            border-color: var(--navy-700);
+            background: rgba(11, 29, 58, 0.04);
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: rgba(3, 13, 30, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            transition: background 0.3s;
+        }
+        .nav.scrolled {
+            background: rgba(3, 13, 30, 0.99);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 5%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+        .nav-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .nav-logo-name {
+            font-family: var(--font-display);
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        .nav-logo-sub {
+            color: var(--gold-300);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 0.1rem;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.78);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            transition: color 0.2s, background 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            background: rgba(255,255,255,0.08);
+        }
+        .nav-links .nav-join a {
+            background: var(--gold-500);
+            color: var(--navy-900);
+            font-weight: 700;
+            padding: 0.5rem 1.25rem;
+        }
+        .nav-links .nav-join a:hover {
+            background: var(--gold-400);
+        }
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            gap: 5px;
+            flex-direction: column;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+        .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            padding: calc(var(--nav-height) + 5rem) 5% 5rem;
+            background: var(--navy-900);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 70% 60% at 65% 50%, rgba(17, 37, 80, 0.6) 0%, transparent 70%),
+                radial-gradient(ellipse at 5% 80%, rgba(196, 145, 43, 0.07) 0%, transparent 50%);
+        }
+        .hero-dots {
+            position: absolute;
+            inset: 0;
+            opacity: 0.18;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .hero-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content { max-width: 600px; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(196, 145, 43, 0.12);
+            border: 1px solid rgba(196, 145, 43, 0.3);
+            color: var(--gold-300);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            animation: heroFadeDown 0.8s ease both;
+        }
+        .hero-badge span { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold-500); }
+        .hero-content h1 {
+            font-family: var(--font-display);
+            color: var(--white);
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: heroFadeUp 0.8s ease 0.15s both;
+        }
+        .hero-content h1 em {
+            font-style: normal;
+            color: var(--gold-300);
+        }
+        .hero-content p {
+            color: rgba(255,255,255,0.72);
+            font-size: clamp(1rem, 1.8vw, 1.125rem);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            animation: heroFadeUp 0.8s ease 0.25s both;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 0.875rem;
+            flex-wrap: wrap;
+            animation: heroFadeUp 0.8s ease 0.35s both;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: wrap;
+            animation: heroFadeUp 0.8s ease 0.45s both;
+        }
+        .hero-stat-num {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .hero-stat-num span { color: var(--gold-300); }
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.04em;
+            font-weight: 500;
+        }
+    
+        /* Hero Animations */
+        @keyframes heroFadeDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroScaleIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.025); opacity: 0.7; }
+        }
+        @keyframes chipFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ===== ABOUT ===== */
+        .about { padding: 6.5rem 5%; background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .about-visual-card {
+            background: linear-gradient(145deg, var(--navy-800), var(--navy-600));
+            border-radius: var(--radius-xl);
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .about-visual-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 40px solid rgba(196, 145, 43, 0.08);
+        }
+        .about-visual-card img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            margin: 0 auto;
+            position: relative;
+        }
+        .about-visual-caption {
+            color: var(--gold-300);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+        }
+        .about-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+            justify-content: center;
+        }
+        .about-chip {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem 1rem;
+            text-align: center;
+        }
+        .about-chip strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--gold-300);
+        }
+        .about-chip span {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .about-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--navy-700);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+        }
+        .about-text p {
+            color: var(--text-mid);
+            font-size: 1rem;
+            margin-bottom: 1.1rem;
+        }
+        .about-text p strong { color: var(--navy-700); }
+        .about-pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.875rem;
+            margin-top: 2.25rem;
+        }
+        .pillar {
+            background: var(--cream);
+            border-radius: var(--radius-md);
+            padding: 1.1rem 1.25rem;
+            border-left: 3px solid var(--navy-700);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .pillar:hover { border-color: var(--gold-500); background: #FAF5EB; }
+        .pillar-title {
+            font-family: var(--font-display);
+            color: var(--navy-700);
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .pillar-desc { color: var(--text-light); font-size: 0.82rem; line-height: 1.55; }
+
+        /* ===== MISSION & VISION ===== */
+        .mission-vision {
+            padding: 6rem 5%;
+            background: linear-gradient(150deg, var(--navy-900) 0%, var(--navy-700) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .mv-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 145, 43, 0.1);
+        }
+        .mv-bg-circle-1 { width: 500px; height: 500px; right: -150px; top: -150px; }
+        .mv-bg-circle-2 { width: 320px; height: 320px; left: -80px; bottom: -100px; }
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+        .mv-card {
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+            position: relative;
+        }
+        .mv-card:hover {
+            background: rgba(255,255,255,0.09);
+            border-color: var(--gold-border);
+            transform: translateY(-4px);
+        }
+        .mv-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(196, 145, 43, 0.15);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--gold-300);
+        }
+        .mv-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-300);
+            margin-bottom: 0.75rem;
+        }
+        .mv-card p {
+            color: rgba(255,255,255,0.76);
+            font-size: 0.96rem;
+            line-height: 1.8;
+        }
+        .values-list { display: flex; flex-direction: column; gap: 0.55rem; }
+        .value-item {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.76);
+            line-height: 1.6;
+            padding-left: 1.1rem;
+            position: relative;
+        }
+        .value-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.58em;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold-400);
+        }
+        .value-item strong { color: var(--gold-300); font-weight: 600; }
+
+        /* ===== OBJECTIVES ===== */
+        .objectives { padding: 6rem 5%; background: var(--cream); }
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .obj-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .obj-item:hover {
+            border-color: var(--navy-700);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+        }
+        .obj-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--navy-700);
+            opacity: 0.12;
+            line-height: 1;
+            min-width: 2.5rem;
+            flex-shrink: 0;
+        }
+        .obj-text { color: var(--text-mid); font-size: 0.98rem; padding-top: 0.3rem; line-height: 1.7; }
+        .obj-text strong { color: var(--navy-700); font-weight: 600; }
+
+        /* ===== PROGRAMS ===== */
+        .programs { padding: 6.5rem 5%; background: var(--white); }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .program-card {
+            background: var(--cream);
+            border-radius: var(--radius-md);
+            padding: 2rem 1.75rem;
+            border: 1px solid var(--border);
+            transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            cursor: default;
+        }
+        .program-card:hover {
+            background: var(--navy-700);
+            border-color: var(--navy-700);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .program-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(11, 29, 58, 0.08);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--navy-700);
+            transition: background 0.3s, color 0.3s;
+        }
+        .program-card:hover .program-icon {
+            background: rgba(196, 145, 43, 0.15);
+            color: var(--gold-300);
+        }
+        .program-title {
+            font-family: var(--font-display);
+            color: var(--navy-700);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        .program-desc {
+            color: var(--text-light);
+            font-size: 0.855rem;
+            line-height: 1.65;
+            transition: color 0.3s;
+        }
+        .program-card:hover .program-title { color: var(--white); }
+        .program-card:hover .program-desc { color: rgba(255,255,255,0.7); }
+        /* ===== BLOG STYLES ===== */
+.blog-section { padding: 6.5rem 5%; background: var(--white); }
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.blog-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--navy-500);
+}
+
+.blog-thumb {
+    height: 220px;
+    background: var(--navy-800);
+    position: relative;
+    /* You can add background-image: url() here later */
+}
+
+.blog-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1.25rem;
+    background: var(--gold-500);
+    color: var(--navy-900);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.blog-body { padding: 1.75rem; }
+
+.blog-meta {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+}
+
+.blog-body h3 {
+    font-family: var(--font-display);
+    color: var(--navy-700);
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+}
+
+.blog-body p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    margin-bottom: 1.5rem;
+}
+
+.blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--navy-700);
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: gap 0.2s;
+}
+
+.blog-link:hover { gap: 0.8rem; color: var(--gold-500); }
+        /* ===== EVENTS ===== */
+        .events { padding: 6.5rem 5%; background: var(--cream); }
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .event-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem 2rem;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+        }
+        .event-card:hover {
+            border-color: var(--navy-700);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+    
+        }
+        .event-body { flex: 1; min-width: 0; }
+        .event-type-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+            border-radius: 100px;
+            margin-bottom: 0.6rem;
+        }
+        .event-type-badge.leadership { background: rgba(11,29,58,0.1); color: var(--navy-700); }
+        .event-type-badge.forum { background: rgba(196,145,43,0.15); color: #8B6817; }
+        .event-type-badge.environment { background: rgba(34, 100, 56, 0.1); color: #1E5C35; }
+        .event-type-badge.community { background: rgba(80, 40, 140, 0.1); color: #4A1E8C; }
+        .event-title {
+            font-family: var(--font-display);
+            color: var(--navy-700);
+            font-size: 1.02rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+        .event-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-bottom: 0.65rem;
+        }
+        .event-meta .icon { width: 13px; height: 13px; }
+        .event-desc { color: var(--text-mid); font-size: 0.875rem; line-height: 1.65; }
+
+    .event-card {
+    overflow: hidden; /* CRITICAL: This clips the image to the card's rounded corners */
+    display: flex;
+    flex-direction: column;
+}
+.section-head {
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+}
+.event-card {
+    max-width: 450px; /* Adjust this number to change the card size */
+    margin-left: 0;   /* Keep it to the left */
+    margin-right: auto; 
+    
+    /* Keep your existing styles below */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+.events-placeholder {
+    display: flex;
+    flex-direction: column;   /* Stacks the text and icon vertically */
+    justify-content: center;  /* Centers content vertically */
+    align-items: center;      /* Centers content horizontally */
+    
+    max-width: 600px;         /* Limits the width so it doesn't stretch too far */
+    margin: 0 auto;           /* This centers the entire box on the page */
+    
+    padding: 5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(196, 145, 43, 0.4); 
+    border-radius: 20px;
+    text-align: center;
+}
+.section-head p {
+    text-align: center;      /* Centers the description text */
+    margin-left: auto;       /* Ensures the block itself is centered */
+    margin-right: auto;
+    max-width: 650px;        /* Keeps lines from being too long to read */
+}
+
+    /* ===== EVENT IMAGE ===== */
+.event-image {
+    width: 100%;        /* Keeps it as wide as the card */
+    height: auto;       /* This is the key! It lets the height adjust naturally */
+    object-fit: contain; /* Ensures the whole flyer is visible without cropping */
+    display: block;
+}
+        /* ===== JOIN CTA ===== */
+        .join-cta {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--navy-900), var(--navy-600));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .join-cta::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 145, 43, 0.1);
+        }
+        .join-cta-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .join-cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.04em;
+            margin: 1rem 0 1.25rem;
+            line-height: 1.15;
+        }
+        .join-cta p {
+            color: rgba(255,255,255,0.72);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+        }
+        .join-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* ===== LEADERSHIP ===== */
+        .leadership { padding: 6.5rem 5%; background: var(--white); }
+       .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    justify-content: center; /* This line will center the cards horizontally */
+}
+        .leader-card {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .leader-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--navy-500);
+        }
+        .leader-card.featured {
+            background: var(--navy-800);
+            border-color: var(--navy-700);
+            color: var(--white);
+        }
+        .leader-card.featured:hover { border-color: var(--gold-500); }
+        .leader-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 800;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--navy-600), var(--navy-500));
+            color: var(--white);
+            border: 2px solid var(--border);
+        }
+        .leader-card.featured .leader-avatar {
+            width: 100px;
+            height: 100px;
+            border-color: rgba(196, 145, 43, 0.4);
+        }
+        .leader-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .leader-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy-700);
+            margin-bottom: 0.3rem;
+        }
+        .leader-card.featured .leader-name { color: var(--white); }
+        .leader-org {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        .leader-card.featured .leader-org { color: rgba(255,255,255,0.55); }
+        .leader-role-badge {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.3rem 0.85rem;
+            border-radius: 100px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: rgba(11, 29, 58, 0.08);
+            color: var(--navy-700);
+            border: 1px solid var(--border);
+        }
+        .leader-card.featured .leader-role-badge {
+            background: rgba(196, 145, 43, 0.15);
+            color: var(--gold-300);
+            border-color: var(--gold-border);
+        }
+        
+
+        /* ===== CONTACT ===== */
+        .contact { padding: 6.5rem 5%; background: var(--cream); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .contact-info-heading {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--navy-700);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+        .contact-info-sub {
+            color: var(--text-mid);
+            font-size: 0.96rem;
+            margin-bottom: 2.25rem;
+        }
+        .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .contact-card:hover {
+            border-color: var(--navy-700);
+            transform: translateX(3px);
+        }
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--navy-700);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+        .contact-icon .icon { width: 18px; height: 18px; }
+        .contact-card-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--navy-700);
+            margin-bottom: 0.3rem;
+        }
+        .contact-card-text,
+        .contact-card-text a {
+            color: var(--text-mid);
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+        .contact-card-text a:hover { color: var(--navy-700); text-decoration: underline; }
+        .contact-social { margin-top: 1.75rem; }
+        .contact-social-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.85rem;
+        }
+        .social-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.1rem;
+            background: var(--navy-700);
+            color: var(--white);
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .social-link:hover {
+            background: var(--navy-900);
+            transform: translateY(-2px);
+        }
+        .social-link .icon { width: 16px; height: 16px; }
+        /* Contact Form */
+        .contact-form-card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-form-card h3 {
+            font-family: var(--font-display);
+            color: var(--navy-700);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .contact-form-sub {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 1.75rem;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--navy-700);
+            letter-spacing: 0.02em;
+            margin-bottom: 0.4rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 0.92rem;
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--navy-700);
+            box-shadow: 0 0 0 3px rgba(11, 29, 58, 0.07);
+        }
+        .form-control::placeholder { color: var(--text-light); }
+        textarea.form-control { height: 130px; resize: vertical; }
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--navy-700);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+        .form-submit:hover { background: var(--navy-900); transform: translateY(-1px); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(180deg, var(--navy-900), #010812);
+            color: var(--white);
+            padding: 4.5rem 5% 2.5rem;
+        }
+        .footer-inner { max-width: 1160px; margin: 0 auto; }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3.5rem;
+            padding-bottom: 3rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .footer-logo img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+        .footer-logo-name {
+            font-family: var(--font-display);
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: block;
+        }
+        .footer-logo-sub {
+            color: var(--gold-300);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .footer-brand p {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            max-width: 280px;
+        }
+        .footer-col-title {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gold-300);
+            margin-bottom: 1.25rem;
+        }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .footer-links a {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--white); }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            margin-bottom: 0.85rem;
+            color: rgba(255,255,255,0.55);
+            font-size: 0.875rem;
+        }
+        .footer-contact-item .icon { width: 15px; height: 15px; margin-top: 0.15em; opacity: 0.6; flex-shrink: 0; }
+        .footer-contact-item a { color: inherit; transition: color 0.2s; }
+        .footer-contact-item a:hover { color: var(--white); }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.8rem; }
+        .footer-bottom a { color: rgba(255,255,255,0.35); font-size: 0.8rem; transition: color 0.2s; }
+        .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--navy-700);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(140%);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 9999;
+            max-width: 320px;
+            border-left: 4px solid var(--gold-500);
+        }
+        .toast.show { transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero-container { grid-template-columns: 1fr; justify-items: center; }
+            .hero-visual { display: block; margin: 0 auto; width: min(320px, 80%); }
+            .hero-content { max-width: 100%; text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --nav-height: 64px; }
+            .nav-hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--navy-900);
+                flex-direction: column;
+                padding: 0.75rem 5%;
+                gap: 0.15rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 0.65rem 0.75rem; font-size: 0.95rem; border-radius: var(--radius-sm); }
+            .nav-links .nav-join { margin-top: 0.5rem; padding-bottom: 0.5rem; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .events-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-brand { grid-column: span 1; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .about-pillars { grid-template-columns: 1fr; }
+            .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 520px) {
+            .leadership-grid { grid-template-columns: 1fr; }
+            .hero-stat-num { font-size: 1.4rem; }
+            .hero-stats { gap: 1.75rem; }
+        }
+    /* --- MAINTENANCE OVERLAY STYLES --- */
+
+/* 1. Prevent scrolling when locked */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+/* 2. Main Overlay (The Frost Effect) */
+#maintenance-mode {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(15, 23, 42, 0.7); /* Deep Translucent Navy */
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 99999; 
+    color: white; 
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 3. The Content Box (Glassmorphism) */
+.maintenance-box {
+    position: relative;
+    z-index: 100000;
+    pointer-events: all; /* Ensures clicks pass through the blur */
+    background: rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.logo { 
+    font-weight: 800; 
+    font-size: 2.5rem; 
+    color: #fbbf24; 
+    margin-bottom: 0.5rem; 
+    letter-spacing: -1px; 
+}
+
+/* 4. Spinner & Loading */
+.loader-container { margin: 30px 0; }
+.spinner {
+    width: 40px; 
+    height: 40px; 
+    margin: 0 auto 15px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #fbbf24; 
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 5. Input & Error Effects */
+#adminPass {
+    width: 100%; 
+    padding: 14px; 
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 12px;
+    color: white; 
+    text-align: center; 
+    font-size: 1rem; 
+    transition: 0.3s; 
+    outline: none;
+}
+#adminPass:focus { 
+    border-color: #fbbf24; 
+    background: rgba(255, 255, 255, 0.15); 
+}
+
+.input-error {
+    animation: shake 0.4s ease-in-out;
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+.error-message { 
+    color: #ef4444; 
+    font-size: 0.85rem; 
+    margin-top: 10px; 
+    display: none; 
+    font-weight: 500; 
+}
+
+/* 6. Buttons Alignment & Interaction */
+.login-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.login-btn, .cancel-btn {
+    flex: 1; 
+    height: 48px; 
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    border: none;
+    pointer-events: auto; /* Ensures the buttons react to mouse clicks */
+}
+
+.login-btn {
+    background: #fbbf24;
+    color: #0f172a;
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-btn:hover { background: #f59e0b; transform: translateY(-2px); }
+.cancel-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+
+/* --- LEADERSHIP GRID --- */
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center; 
+    justify-items: center; 
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Styling for the initial Admin Preview button */
+.admin-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0px;
+    backdrop-filter: blur(5px);
+}
+
+.admin-btn:hover {
+    background: #fbbf24; /* YENC Gold */
+    color: #0f172a;      /* Dark Navy text on hover */
+    border-color: #fbbf24;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+}
+/* Center and scale the new logo image */
+.center-logo {
+    display: block;
+    max-width: 150px; /* Adjust size as needed */
+    height: auto;
+    margin: 0 auto 1rem auto; /* Centers horizontally, adds bottom spacing */
+    
+    /* Adds a very subtle 'glow' to the white logo against the blur */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2)); 
+}
+
+/* Optional: Make the h1 text slightly larger now that it's the main headline */
+#main-content h1 {
+    font-size: 2rem;
+    margin-top: 0;
+}
+.action-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between the two buttons */
+    align-items: center;
+    margin-top: 25px;
+}
+
+.join-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+}
+
+.join-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    border-color: #fbbf24; /* Changes border to gold on hover */
+}
+    </style>
+</head>
+<div id="maintenance-mode">
+   <div id="main-content" class="maintenance-box">
+    <img src="images/white-logo-yen.png.png" alt="YENC Calauag Logo" class="center-logo">
+    <h1>Under Construction</h1>
+    <p>The Youth Empowerment Network Calauag is preparing for launch.</p>
+    <div id="main-content">
+</div>
+    <div class="loader-container">
+        <div class="spinner"></div>
+        <p class="loading-text">Preparing Excellence...</p>
+    </div>
+<div class="action-group">
+        <a href="https://forms.gle/QtSw3yrEcovdnSrU8" target="_blank" class="join-btn">
+            Interested in joining? Click here!
+        </a>
+        
+        <button onclick="showLogin()" class="admin-btn">Admin Preview</button>
+    </div>
+</div>
+
+    <div id="login-box" class="maintenance-box" style="display: none;">
+          <img src="images/white-logo-yen.png.png" alt="YENC Calauag Logo" class="center-logo">
+        <div class="logo" style="color: #64748b;">ADMIN</div>
+        <h3>Security Check</h3>
+        <div class="input-wrapper">
+    <input type="password" id="adminPass" placeholder="Enter Password..." />
+    <div id="error-text" class="error-message">⚠️ Incorrect password. Try again.</div>
+    </div>
+        <div class="login-actions">
+            <button onclick="hideLogin()" class="cancel-btn">Back</button>
+            <button onclick="validatePassword()" class="login-btn">Unlock</button>
+        </div>
+    </div>
+</div>
+<!-- Hidden SVG icon sprites -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="ic-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="ic-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="ic-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="ic-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="ic-graduation" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.5c3.38-1.28 7.3-2.15 11.68-1.85C20.22 18 22 13 22 8c-2-.5-4-1-5-1.16"/><path d="M2 22c2-4 5-8 12-10"/></symbol>
+    <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4"/><path d="M7 4H4a2 2 0 0 0-2 2v2a4 4 0 0 0 4 4M17 4h3a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4"/><path d="M12 2a5 5 0 0 1 5 5v4a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"/></symbol>
+    <symbol id="ic-megaphone" viewBox="0 0 24 24"><path d="M3 11l19-9v18L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="ic-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="ic-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="ic-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="ic-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="nav">
+    <div class="nav-container">
+        <a href="#home" class="nav-logo">
+            <img src="images/yen-logo.png" alt="YENC Logo">
+            <div class="nav-logo-text">
+                <span class="nav-logo-name">Youth Empowerment Network</span>
+                <span class="nav-logo-sub">YENC</span>
+            </div>
+        </a>
+        <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeNav()">Home</a></li>
+            <li><a href="#about" onclick="closeNav()">About</a></li>
+            <li><a href="#mission" onclick="closeNav()">Mission&amp;Vision</a></li>
+            <li><a href="#programs" onclick="closeNav()">Programs</a></li>
+            <li><a href="#events" onclick="closeNav()">Events</a></li>
+            <li><a href="#leadership" onclick="closeNav()">Leadership</a></li>
+            <li><a href="contacts.html" onclick="closeNav()">Contact</a></li>
+            <li><a href="blog.html" onclick="closeNav()">Blog</a></li>
+            <li class="nav-join"><a href="https://forms.gle/My2PyvAE3ikTP2JHA" target="_blank" rel="noopener">JoinYENC</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-badge">
+            
+                Calauag, Quezon &nbsp;&bull;&nbsp; Youth-Led Organization
+            </div>
+            <h1>Empowering Youth.<br><em>Building Community.</em><br>Shaping Tomorrow.</h1>
+            <p>The Youth Empowerment Network Calauag (YENC) is a youth-led organization committed to developing responsible, empowered, and community-driven young leaders. We believe the youth are not just the future — they are active changemakers of today.</p>
+            <div class="hero-buttons">
+                <a href="https://forms.gle/My2PyvAE3ikTP2JHA" class="btn btn-gold" target="_blank" rel="noopener">
+                    Join YENC
+                    <span class="icon"><svg><use href="#ic-arrow-right"/></svg></span>
+                </a>
+                <a href="#about" class="btn btn-ghost">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat-item">
+                    <div class="hero-stat-num">10<span>+</span></div>
+                    <div class="hero-stat-label">Active Members</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-num">1<span>+</span></div>
+                    <div class="hero-stat-label">Programs Running</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-num">100<span>%</span></div>
+                    <div class="hero-stat-label">Youth-Led</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-num">1</div>
+                    <div class="hero-stat-label">Community</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-visual-card reveal">
+                <img src="images/yen-logo.png" alt="YENC Calauag Logo">
+                <p class="about-visual-caption">Calauag Chapter &mdash; Quezon Province</p>
+                <div class="about-chips">
+                    <div class="about-chip">
+                        <strong>Youth-Led</strong>
+                        <span>Organization</span>
+                    </div>
+                    <div class="about-chip">
+                        <strong>Calauag</strong>
+                        <span>Quezon, PH</span>
+                    </div>
+                    <div class="about-chip">
+                        <strong>NGO</strong>
+                        <span>Non-Profit</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text reveal reveal-d1">
+                <div class="section-label light">About Us</div>
+                <h2>Who We Are</h2>
+                <p>The <strong>Youth Empowerment Network Calauag (YENC)</strong> is a youth-led, non-profit organization dedicated to developing responsible, empowered, and community-driven young leaders across Calauag, Quezon.</p>
+                <p>Founded with the vision of uniting young people for meaningful change, YENC provides a platform for leadership training, civic engagement, community outreach, and personal growth. We create safe spaces where youth can discover their potential and take action on issues that matter to them.</p>
+                <p>Through diverse programs and community partnerships, YENC works to strengthen youth participation in local development — because we believe the youth of Calauag are not just the future, they are the present.</p>
+                <div class="about-pillars">
+                    <div class="pillar">
+                        <div class="pillar-title">Leadership Training</div>
+                        <div class="pillar-desc">Workshops and programs that build capable, confident young leaders</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-title">Community Outreach</div>
+                        <div class="pillar-desc">Hands-on service that creates real, lasting local impact</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-title">Youth Forums</div>
+                        <div class="pillar-desc">Open assemblies that elevate and amplify youth voices</div>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-title">Skills Development</div>
+                        <div class="pillar-desc">Practical seminars in communication, teamwork, and problem-solving</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MISSION & VISION ===== -->
+<section class="mission-vision" id="mission">
+    <div class="mv-bg-circle mv-bg-circle-1"></div>
+    <div class="mv-bg-circle mv-bg-circle-2"></div>
+    <div class="container" style="position:relative;z-index:1">
+        <div class="section-head reveal">
+            <div class="section-label dark">Our Foundation</div>
+            <h2 class="light">Mission &amp; Vision</h2>
+            <p class="light">The principles and purpose that guide every action YENC takes in the community.</p>
+            <div class="section-rule gold-rule"></div>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card reveal reveal-d1">
+                <div class="mv-icon">
+                    <span class="icon" style="width:26px;height:26px">
+                        <svg><use href="#ic-target"/></svg>
+                    </span>
+                </div>
+                <h3>Our Mission</h3>
+                <p>To empower the youth of Calauag by providing opportunities for leadership development, community involvement, and personal growth — through programs that inspire service, creativity, and a deep sense of responsibility.</p>
+            </div>
+            <div class="mv-card reveal reveal-d2">
+                <div class="mv-icon">
+                    <span class="icon" style="width:26px;height:26px">
+                        <svg><use href="#ic-eye"/></svg>
+                    </span>
+                </div>
+                <h3>Our Vision</h3>
+                <p>A united and empowered youth of Calauag who are proactive leaders, socially responsible citizens, and catalysts of positive change — making their community, province, and nation a better place for all.</p>
+            </div>
+            <div class="mv-card reveal reveal-d3">
+                <div class="mv-icon">
+                    <span class="icon" style="width:26px;height:26px">
+                        <svg><use href="#ic-star"/></svg>
+                    </span>
+                </div>
+                <h3>Core Values</h3>
+                <div class="values-list">
+                    <div class="value-item"><strong>Leadership</strong> — Developing confident and responsible young leaders</div>
+                    <div class="value-item"><strong>Service</strong> — Commitment to helping the community selflessly</div>
+                    <div class="value-item"><strong>Integrity</strong> — Upholding honesty and strong moral principles</div>
+                    <div class="value-item"><strong>Unity</strong> — Building teamwork and collaboration among youth</div>
+                    <div class="value-item"><strong>Empowerment</strong> — Encouraging self-growth and building confidence</div>
+                    <div class="value-item"><strong>Creativity</strong> — Promoting innovation and expression among young people</div>
+                </div>
+            </div>
+            <div class="mv-card reveal reveal-d4">
+                <div class="mv-icon">
+                    <span class="icon" style="width:26px;height:26px">
+                        <svg><use href="#ic-pin"/></svg>
+                    </span>
+                </div>
+                <h3>Our Community</h3>
+                <p>Proudly rooted in Calauag, Quezon, every program YENC runs is designed around the specific needs, aspirations, and challenges of local youth. We work hand-in-hand with community stakeholders, schools, and local government every step of the way.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== OBJECTIVES ===== -->
+<section class="objectives" id="objectives">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">Our Goals</div>
+            <h2>What We Strive For</h2>
+            <p>The measurable objectives that drive YENC's programs and initiatives forward.</p>
+            <div class="section-rule"></div>
+        </div>
+        <div class="objectives-grid">
+            <div class="obj-item reveal reveal-d1">
+                <div class="obj-num">01</div>
+                <div class="obj-text">To provide <strong>leadership training</strong> and youth development programs that equip young people with the skills to lead effectively in their communities.</div>
+            </div>
+            <div class="obj-item reveal reveal-d2">
+                <div class="obj-num">02</div>
+                <div class="obj-text">To promote <strong>active participation</strong> in community service and outreach activities that create tangible, positive change in Calauag.</div>
+            </div>
+            <div class="obj-item reveal reveal-d3">
+                <div class="obj-num">03</div>
+                <div class="obj-text">To develop <strong>essential life skills</strong> including communication, critical thinking, teamwork, and problem-solving among young members.</div>
+            </div>
+            <div class="obj-item reveal reveal-d4">
+                <div class="obj-num">04</div>
+                <div class="obj-text">To encourage <strong>youth involvement</strong> in social, civic, and environmental issues that affect their lives and the lives of those around them.</div>
+            </div>
+            <div class="obj-item reveal reveal-d5">
+                <div class="obj-num">05</div>
+                <div class="obj-text">To create meaningful <strong>collaboration opportunities</strong> between different youth sectors, schools, organizations, and community stakeholders.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROGRAMS ===== -->
+<section class="programs" id="programs">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">What We Do</div>
+            <h2>Programs &amp; Activities</h2>
+            <p>YENC runs diverse programs designed to nurture youth leadership, community spirit, and meaningful personal growth.</p>
+            <div class="section-rule"></div>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card reveal reveal-d1">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-graduation"/></svg></span>
+                </div>
+                <div class="program-title">Leadership Training Workshops</div>
+                <div class="program-desc">Hands-on seminars that equip young people with leadership skills — from public speaking and strategic thinking to team management and decision-making.</div>
+            </div>
+            <div class="program-card reveal reveal-d2">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-heart"/></svg></span>
+                </div>
+                <div class="program-title">Community Outreach Programs</div>
+                <div class="program-desc">Volunteer initiatives that bring YENC members into the community to address local needs through direct service, care, and meaningful action.</div>
+            </div>
+            <div class="program-card reveal reveal-d3">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-chat"/></svg></span>
+                </div>
+                <div class="program-title">Youth Forums &amp; Assemblies</div>
+                <div class="program-desc">Open platforms where youth voices are heard, ideas are exchanged, and young leaders engage in conversations about issues that matter most to them.</div>
+            </div>
+            <div class="program-card reveal reveal-d4">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-leaf"/></svg></span>
+                </div>
+                <div class="program-title">Environmental Campaigns</div>
+                <div class="program-desc">Grassroots initiatives including clean-up drives, tree planting activities, and community awareness campaigns for sustainable and responsible living.</div>
+            </div>
+            <div class="program-card reveal reveal-d5">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-briefcase"/></svg></span>
+                </div>
+                <div class="program-title">Skills Development Seminars</div>
+                <div class="program-desc">Practical workshops covering communication, digital literacy, financial awareness, entrepreneurship, and other life skills critical for today's youth.</div>
+            </div>
+            <div class="program-card reveal reveal-d6">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-trophy"/></svg></span>
+                </div>
+                <div class="program-title">Sports &amp; Cultural Events</div>
+                <div class="program-desc">Tournaments, cultural showcases, and recreational events that foster teamwork, cultural pride, physical wellness, and community spirit.</div>
+            </div>
+            <div class="program-card reveal reveal-d1">
+                <div class="program-icon">
+                    <span class="icon"><svg><use href="#ic-megaphone"/></svg></span>
+                </div>
+                <div class="program-title">Advocacy Campaigns</div>
+                <div class="program-desc">Targeted campaigns raising awareness on mental health, access to education, gender equality, and other pressing social issues affecting youth.</div>
+            </div>
+        </div>
+    </div>
+</section>
+       
+   <section id="blog" class="blog-section reveal">
+    <div class="container">
+        <div class="section-head">
+            <span class="section-label light">Latest Updates</span>
+            <h2>YENC <em>Stories</em> & News</h2>
+            <p>Stay updated with our latest activities, leadership insights, and community impact reports.</p>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-thumb">
+                    <span class="blog-tag">Leadership</span>
+                </div>
+                <div class="blog-body">
+                    <div class="blog-meta">May 10, 2024 • 5 min read</div>
+                    <h3>Empowering the Next Generation of Leaders</h3>
+                    <p>Highlights from our recent leadership forum held at the Calauag Municipal Hall...</p>
+                    <a href="articles/post.html?id=student-academic-performance" class="blog-link">Read Story <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span></a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-thumb">
+                    <span class="blog-tag">Community</span>
+                </div>
+                <div class="blog-body">
+                    <div class="blog-meta">May 05, 2024 • 3 min read</div>
+                    <h3>Coastal Clean-up: Protecting Our Seas</h3>
+                    <p>YENC volunteers joined forces to clean our local shores and promote environmental awareness...</p>
+                    <a href="articles/post.html?id=leadership-forum" class="blog-link">Read Story <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></span></a>
+                </div>
+            </article>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="blog.html" class="btn btn-outline-navy">View All Articles</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EVENTS ===== -->
+<section class="events" id="events">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">What's Happening</div>
+            <h2>Upcoming Events</h2>
+            <p>Stay connected with YENC's latest activities, programs, and community gatherings.</p>
+            <div class="section-rule"></div>
+        </div>
+
+        <div class="events-placeholder reveal">
+            <div class="leader-avatar">
+            <img src="images/pfp.png" alt=loading> 
+        </div>
+            <div class="placeholder-content">
+                <i class="fas fa-calendar-day"></i> <h3>Coming Soon</h3>
+                <p>We are currently planning impactful events for the Calauag youth. Check back soon for updates!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== JOIN CTA ===== -->
+<section class="join-cta">
+    <div class="join-cta-inner">
+        <div class="section-label dark reveal">Be Part of Something Bigger</div>
+        <h2 class="reveal reveal-d1">Why Join YENC?</h2>
+        <p class="reveal reveal-d2">Joining YENC means becoming part of a movement that values your voice, ideas, and potential. It is a space where young people are not only heard — but empowered to lead real change in their own community. Whether you want to develop your leadership skills, give back, or find your tribe, YENC has a place for you.</p>
+        <div class="join-cta-btns reveal reveal-d3">
+            <a href="https://forms.gle/My2PyvAE3ikTP2JHA" class="btn btn-gold" target="_blank" rel="noopener">
+                Join YENC Today
+                <span class="icon"><svg><use href="#ic-arrow-right"/></svg></span>
+            </a>
+            <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LEADERSHIP ===== -->
+<section class="leadership" id="leadership">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">Our People</div>
+            <h2>Chapter Leadership</h2>
+            <p>Meet the dedicated young leaders guiding the YENC Calauag Chapter's mission, programs, and community initiatives.</p>
+            <div class="section-rule"></div>
+        </div>
+        <div class="leadership-grid">
+            <div class="leader-card featured reveal reveal-d1">
+                <div class="leader-avatar">
+                    <img src="images/president-reuel.png" alt="Reuel Josh V. Anda">
+                </div>
+                <div class="leader-name">Reuel Josh V. Anda</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Founder &amp; President</div>
+            </div>
+            <div class="leader-card reveal reveal-d2">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="VP">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Vice President</div>
+            </div>
+            <div class="leader-card reveal reveal-d3">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="Kimberley Castañeda">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Secretary</div>
+            </div>
+            <div class="leader-card reveal reveal-d4">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="Gerard Malabuyoc">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Auditor</div>
+            </div>
+            <div class="leader-card reveal reveal-d5">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="Luis Daniel Danseco">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Public Information Officer</div>
+            </div>
+            <div class="leader-card reveal reveal-d6">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="Athena Fojas">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Project Head</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Advisers ===== -->
+<section class="Adviser" id="Adviser">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">Our Mentor</div>
+            <h2>Our Advisers</h2>
+            <p>Presenting the dedicated advisers, the one who mentors us.</p>
+            <div class="section-rule"></div>
+        </div>
+        <div class="leadership-grid">
+            <div class="leader-card featured reveal reveal-d1">
+                <div class="leader-avatar">
+                    <img src="images/adviser1-lilibeth.png" alt="Edenyl Anda">
+                </div>
+                <div class="leader-name">Lilibeth Layman, LPT</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Adviser 1</div>
+            </div>
+        
+            <div class="leader-card featured reveal reveal-d1">
+                <div class="leader-avatar">
+                    <img src="images/Adviser-Edenyl.jpg" alt="Edenyl Anda">
+                </div>
+                <div class="leader-name">Edenyl Anda, LPT</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Adviser 2</div>
+            </div>
+             <div class="leader-card featured reveal reveal-d1">
+                <div class="leader-avatar">
+                    <img src="images/pfp.png" alt="Edenyl Anda">
+                </div>
+                <div class="leader-name">Coming Soon</div>
+                <div class="leader-org">YENC</div>
+                <div class="leader-role-badge">Adviser 3</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label light">Reach Out</div>
+            <h2>Contact Us</h2>
+            <p>Have questions, want to collaborate, or ready to get involved? We'd love to hear from you.</p>
+            <div class="section-rule"></div>
+        </div>
+        <div class="contact-grid">
+            <div class="reveal">
+                <h3 class="contact-info-heading">Get In Touch</h3>
+                <p class="contact-info-sub">Reach us through any of the channels below. We aim to respond within 24–48 hours.</p>
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <span class="icon"><svg><use href="#ic-pin"/></svg></span>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Location</div>
+                            <div class="contact-card-text">Calauag, Quezon Province<br>Philippines</div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <span class="icon"><svg><use href="#ic-mail"/></svg></span>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Email</div>
+                            <div class="contact-card-text">
+                                <a href="mailto:yenc.secretariat@gmail.com">yenc.secretariat@gmail.com</a><br>
+                                <a href="mailto:yen.calauag.official@gmail.com">yen.calauag.official@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <span class="icon"><svg><use href="#ic-phone"/></svg></span>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">Phone / Mobile</div>
+                            <div class="contact-card-text">
+                                <a href="tel:+639919534049">+63 991 953 4049</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-social">
+                    <div class="contact-social-label">Follow &amp; Connect</div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/18FFHeyh3x/" class="social-link" target="_blank" rel="noopener">
+                            <span class="icon"><svg><use href="#ic-facebook"/></svg></span>
+                            Facebook
+                        </a>
+                        <a href="mailto:yenc.secretariat@gmail.com" class="social-link">
+                            <span class="icon"><svg><use href="#ic-mail"/></svg></span>
+                            Email Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-card reveal reveal-d1">
+    <h3>Send Us a Message</h3>
+    <p class="contact-form-sub">Fill out the form below and a YENC representative will get back to you shortly.</p>
+    <a href="contacts.html" class="social-link" target="_blank" rel="noopener"> Send Message </a>
+</div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="images/yen-logo.png" alt="YENC Logo">
+                    <div>
+                        <span class="footer-logo-name">Youth Empowerment Network Calauag</span>
+                        <span class="footer-logo-sub">YENC &mdash; Quezon Province</span>
+                    </div>
+                </div>
+                <p>A youth-led organization committed to developing responsible, empowered, and community-driven young leaders in Calauag, Quezon. We believe the youth are not just the future — they are active changemakers of today.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Navigate</div>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#mission">Mission &amp; Vision</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#leadership">Leadership</a></li>
+                    <li><a href="contacts.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <div class="footer-contact-item">
+                    <span class="icon"><svg><use href="#ic-pin"/></svg></span>
+                    <span>Calauag, Quezon, Philippines</span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon"><svg><use href="#ic-mail"/></svg></span>
+                    <div>
+                        <a href="mailto:yenc.secretariat@gmail.com">yenc.secretariat@gmail.com</a><br>
+                        <a href="mailto:yen.calauag.official@gmail.com">yen.calauag.official@gmail.com</a>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon"><svg><use href="#ic-phone"/></svg></span>
+                    <a href="tel:+639919534049">+63 991 953 4049</a>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="icon"><svg><use href="#ic-facebook"/></svg></span>
+                    <a href="https://www.facebook.com/share/18FFHeyh3x/" target="_blank" rel="noopener">Facebook Page</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Youth Empowerment Network Calauag (YENC). All rights reserved.</p>
+            <a href="mailto:yenc.secretariat@gmail.com">yenc.secretariat@gmail.com</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert"></div>
+
+<script>
+    /* ===== NAV BEHAVIOR ===== */
+    const nav = document.getElementById('nav');
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 24);
+        updateActiveNav();
+    }, { passive: true });
+
+    function toggleNav() {
+        const open = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open);
+    }
+    function closeNav() {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+    }
+    hamburger.addEventListener('click', toggleNav);
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target)) closeNav();
+    });
+
+    /* ===== SMOOTH SCROLL ===== */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72;
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+            }
+        });
+    });
+
+    /* ===== ACTIVE NAV HIGHLIGHT ===== */
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+    function updateActiveNav() {
+        let current = '';
+        document.querySelectorAll('section[id]').forEach(sec => {
+            if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+        });
+        navAnchors.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ===== CONTACT FORM ===== */
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 4500);
+    }
+    function handleForm(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.form-submit');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        setTimeout(() => {
+            e.target.reset();
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+            showToast('Thank you! Your message has been sent. We\'ll be in touch soon.');
+        }, 1200);
+    }
+</script>
+
+<script>
+    const overlay = document.getElementById('maintenance-mode');
+    const mainMsg = document.getElementById('main-content');
+    const loginBox = document.getElementById('login-box');
+    const passInput = document.getElementById('adminPass');
+    const errorText = document.getElementById('error-text');
+
+    function showLogin() {
+        mainMsg.style.display = 'none';
+        loginBox.style.display = 'block';
+        passInput.focus();
+    }
+
+    function hideLogin() {
+        loginBox.style.display = 'none';
+        mainMsg.style.display = 'block';
+    }
+
+   function validatePassword() {
+    const passInput = document.getElementById('adminPass');
+    const errorText = document.getElementById('error-text');
+    const overlay = document.getElementById('maintenance-mode');
+
+    // 1. Reset state (remove error class if it was there from a previous try)
+    passInput.classList.remove('input-error');
+    
+    if (passInput.value === "YENC2026") {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        localStorage.setItem('yenc_admin_auth', 'true');
+    } else {
+        console.log("Wrong password entered!"); // Check your F12 console for this!
+        
+        // 2. Trigger the shake by adding the class
+        // We use a tiny timeout to re-trigger the animation if they fail twice in a row
+        setTimeout(() => {
+            passInput.classList.add('input-error');
+            errorText.style.display = 'block';
+        }, 10);
+        
+        // 3. Clear the input so they can try again
+        passInput.value = '';
+    }
+}
+
+// Ensure scrolling is disabled on load if overlay is present
+window.onload = function() {
+    if (localStorage.getItem('yenc_admin_auth') === 'true') {
+        document.getElementById('maintenance-mode').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    } else {
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+    // Allow pressing "Enter" to submit
+    passInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            validatePassword();
+        }
+    });
+
+    // Persistent Login: Check if already authenticated
+  window.onload = function() {
+    const overlay = document.getElementById('maintenance-mode');
+    
+    if (localStorage.getItem('yenc_admin_auth') === 'true') {
+        // 1. Hide the overlay
+        overlay.style.display = 'none';
+        
+        // 2. THE FIX: Re-enable scrolling for the logged-in user
+        document.body.style.overflow = 'auto'; 
+    } else {
+        // Keep it locked if not logged in
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+};
+</script>
+</body>
+</html>
