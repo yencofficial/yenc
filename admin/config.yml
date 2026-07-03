@@ -2,7 +2,7 @@ backend:
   name: github
   repo: yencofficial/yenc
   branch: main
-  base_url: https://yenca-h01fi70tw-yencalauagofficial-5780s-projects.vercel.app
+  base_url: https://yenc-git-main-yencalauagofficial-5780s-projects.vercel.app/
   
 media_folder: "images"
 public_folder: "/images"
