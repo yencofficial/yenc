@@ -2,6 +2,7 @@ backend:
   name: github
   repo: yencofficial/yenc # Update this to your real repository path
   branch: main
+  base_url: https://your-oauth-gateway.vercel.app # <--- Add this line!
 
 media_folder: "images"
 public_folder: "/images"
