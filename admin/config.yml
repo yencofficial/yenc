@@ -1,4 +1,4 @@
-backend:
+backend: main
   name: github
   repo: yencofficial/yenc
   branch: main
