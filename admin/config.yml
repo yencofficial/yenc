@@ -1,20 +1,20 @@
-backend: main
+backend:
   name: github
   repo: yencofficial/yenc
   branch: main
   base_url: https://yenc-gw7fuz1hs-yencalauagofficial-5780s-projects.vercel.app
   auth_endpoint: auth
-  
+
 media_folder: "images"
 public_folder: "/images"
 
 collections:
   - name: "blog"
     label: "YENC Journal"
-    files: # <--- Changed from 'file' to 'files' to support individual file tracking
+    files:
       - label: "Blog Posts"
         name: "posts"
-        file: "data/post.json" # <--- Decap maps fields inside a single-file object structure
+        file: "data/post.json"
         fields:
           - { label: "ID", name: "id", widget: "string" }
           - { label: "Title", name: "title", widget: "string" }
