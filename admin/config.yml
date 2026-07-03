@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: your-github-username/your-repository-name # e.g., zervivaljosh/yenc (replace with your actual repo path)
   branch: main
+  base_url: https://your-oauth-gateway.vercel.app # The URL of your deployed OAuth provider
 
 media_folder: "images"
 public_folder: "/images"
