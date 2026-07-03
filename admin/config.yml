@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-github-username/your-repo-name # Update this to your real repository path
+  repo: yencofficial/yenc # Update this to your real repository path
   branch: main
 
 media_folder: "images"
