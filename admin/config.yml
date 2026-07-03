@@ -1,8 +1,7 @@
 backend:
   name: github
-  repo: your-github-username/your-repository-name # e.g., zervivaljosh/yenc (replace with your actual repo path)
+  repo: your-github-username/your-repo-name # Update this to your real repository path
   branch: main
-  base_url: https://your-oauth-gateway.vercel.app # The URL of your deployed OAuth provider
 
 media_folder: "images"
 public_folder: "/images"
@@ -10,12 +9,10 @@ public_folder: "/images"
 collections:
   - name: "blog"
     label: "YENC Journal"
-    file: "data/post.json" # <--- This is the magic line
-    allow_add: true
-    fields:
-      - name: posts
-        label: Posts
-        widget: list
+    files: # <--- Changed from 'file' to 'files' to support individual file tracking
+      - label: "Blog Posts"
+        name: "posts"
+        file: "data/post.json" # <--- Decap maps fields inside a single-file object structure
         fields:
           - { label: "ID", name: "id", widget: "string" }
           - { label: "Title", name: "title", widget: "string" }
